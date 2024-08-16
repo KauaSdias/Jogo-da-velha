@@ -1,22 +1,26 @@
 let button = document.querySelectorAll('button')
+let team = true
 let value = 0
-let end = false
-let rng = 10
 
 let casa = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 function apertou(e) {
     if (casa[e] == 0){
-    button[e].innerHTML = 'X'
-    value = 1
+    if (team){
+        text = 'X'
+        value = 1
+    } else {
+        text = 'O'
+        value = 2
+    }
+
+    button[e].innerHTML = text
     casa[e] = value
 
+    team = !team
 
-    if (!verificarVitoria()){
-        gerarPos()
-    }
-}
-}
+    verificarVitoria()
+}}
 
 function verificarVitoria() {
     // Vertical 1
@@ -69,7 +73,8 @@ function endScreen(){
     menu.style.display = 'flex'
 
     casa = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-
+    
+    team = true
     
     for(let i = 0; i < button.length; i++){
         button[i].innerHTML = ''
@@ -82,15 +87,10 @@ function desligar (){
     menu.style.display = 'none'
 }
 
-function jogadabot(){
-   if ( casa[rng] == 0){
-    button[rng].innerHTML = 'O'
-    value = 2
-    casa[rng] = value
-    verificarVitoria()
-    } else {
-       gerarPos()
-    }
+
+function desligar (){
+    fundo.style.display = 'none'
+    menu.style.display = 'none'
 }
 
 function gerarPos(){
